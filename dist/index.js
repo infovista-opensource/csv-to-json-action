@@ -60,6 +60,7 @@ function run() {
     const stringValue = core.getInput('string');
     const splitBy = core.getInput('split-by');
     const value = stringValue.split(splitBy);
+    core.setOutput('array', value);
     value.forEach((el, index) => {
       core.setOutput(`_${index}`, el);
     });
