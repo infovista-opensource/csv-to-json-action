@@ -59,7 +59,7 @@ function run() {
   try {
     const stringValue = core.getInput('string');
     const splitBy = core.getInput('split-by');
-    const value = stringValue.split(splitBy);
+    const value = stringValue.split(splitBy).map(item => item.trim());
     core.setOutput('array', JSON.stringify(value));
     value.forEach((el, index) => {
       core.setOutput(`_${index}`, el);
