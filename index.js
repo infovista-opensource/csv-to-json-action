@@ -5,7 +5,7 @@ function run() {
     const stringValue = core.getInput('string');
     const splitBy = core.getInput('split-by');
     const value = stringValue.split(splitBy).map(item => item.trim());
-    core.setOutput('array', JSON.stringify(value));
+    core.setOutput('array', JSON.stringify([1,2]));
     value.forEach((el, index) => {
       core.setOutput(`_${index}`, el);
     });
