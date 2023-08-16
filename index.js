@@ -3,14 +3,16 @@ const core = require('@actions/core');
 function run() {
   try {
     const stringValue = core.getInput('string');
-    const splitBy = core.getInput('split-by');
+    const splitByText = core.getInput('split-by');
+    const splitBy = splitByText.length ? splitByText : ','
+    const arrayNameText = core.getInput('name')
+    const arrayName = arrayNameText.length ? arrayNameText : 'array'
     const value = stringValue.split(splitBy).map(item => item.trim());
-    core.setOutput('array', JSON.stringify(value));
-    value.forEach((el, index) => {
-      core.setOutput(`_${index}`, el);
-    });
+    const jsonValue = JSON.stringify(value)
+    core.debug(`setting json array output ${arrayName}: ${jsonValue}`)
+    core.setOutput(arrayName, jsonValue);
   } catch (err) {
-    core.setFailed(err.message);
+    if (err instanceof Error) core.setFailed(err.message)
   }
 
 }

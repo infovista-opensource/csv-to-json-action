@@ -1,31 +1,28 @@
-# Github Split-By Action
+# Github CSV to JSON action
 
-Actions splits strings by the given delimiter
+Split CSV string into a JSON object suitable for downstream matrix jobs.
 
 ## Inputs
-### `string`
-**required** string to be split
-### `split-by`
-**required** string/char to be used as the delimiter to split the string.
+- `string`, string to be split
+- `split-by`, string/char to be used as the delimiter to split the string (default `,`)
+- `name`, string with the JSON array (default `array`)
 
 ## Output
-### value 
-Object containing key value pairs
+Object containing a JSON array
 ```json
 {
-    _0: 'first',
-    _1: 'secound'
+    'arrayname': ['first','second']
 }
 ```
 
 ## Example Usage
 
 ```yml
-- uses: rishabhgupta/split-by@v1
+- uses: infovista-opensource/csv-to-json-action@v1
   id: split
   with:
-    string: 'feat/branch-name'
-    split-by: '/'
+    string: 'aaa,bbb'
+    name: 'arrayname'
 - run: | 
-    echo "${{ steps.split.outputs._1}}"
+    echo "${{ steps.split.outputs.arrayname}}"
   ```
